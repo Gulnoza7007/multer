@@ -9,7 +9,20 @@
 </head>
 <body>
     <%- include( "components/header" ) %>
-    view
+    <% for(let i = 0; i < files.length; i++){ %>
+        <p>Name: <%= files[i].originalName %> | Type: <%= files[i].mimetype %></p>
+      
+        <% if(files[i].mimetype.startsWith('image/')) { %>
+          <img src="/uploads/<%= files[i].storedName %>" alt="<%= files[i].originalName %>" width="300">
+        <% } else if(files[i].mimetype.startsWith('video/')) { %>
+          <video width="400" controls>
+            <source src="/uploads/<%= files[i].storedName %>" type="<%= files[i].mimetype %>">
+            Your browser does not support the video tag.
+          </video>
+        <% } else { %>
+          <a href="/uploads/<%= files[i].storedName %>">Download <%= files[i].originalName %></a>
+        <% } %>
+      <% } %>
     <%- include( "components/footer" ) %>
 </body>
 </html>

@@ -1,16 +1,13 @@
-import { Router } from "express";
+import { Router } from 'express'
 
+const app = Router()
 
-const app = Router();
+app.get('/', async (req, res) => {
+    const success = req.query.success === '1'
+    res.render('index', { success })
+})
+app.get('/uploads', async (req, res) => {
+    res.render('uploads')
+})
 
-app.get("/", async (req, res) => {
-   res.render('index')
-});
-app.get("/view", async (req, res) => {
-    res.render('view')
- });
- app.get("/dashboard", async (req, res) => {
-    res.render('dashboard')
- });
-
-export default app;
+export default app
